@@ -1,0 +1,92 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NapierBankMessageFilter"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="mainForm" x:Class="NapierBankMessageFilter.MainWindow"
+        mc:Ignorable="d"
+        Title="Napier Bank Filter System" Height="750" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow" Background="#FFF2F2F2">
+    <Grid Background="#FFF4F4F5">
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="730" VerticalAlignment="Top" Width="260" Margin="0,0,0,-0.4"/>
+        <Image Margin="0,16,1019,601" Source="logo.png" Stretch="Fill"/>
+        <Rectangle Fill="#FF232323" HorizontalAlignment="Left" Height="134" Margin="260,0,-0.4,0" VerticalAlignment="Top" Width="1014"/>
+        <Rectangle Fill="#FFD41E46" HorizontalAlignment="Left" Height="50" Margin="260,133,-0.4,0" VerticalAlignment="Top" Width="1014"/>
+        <Button x:Name="emailButton" Content="" HorizontalAlignment="Left" Margin="70,170,0,0" VerticalAlignment="Top" Width="120" Height="100" Foreground="{x:Null}" Click="emailButton_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="emailIcon.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="tweetButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="70,497,0,0" Foreground="{x:Null}" BorderBrush="{x:Null}" Height="100" Click="tweetButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="tweetIcon.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="smsButton" Content="Button" HorizontalAlignment="Left" Margin="70,324,0,0" VerticalAlignment="Top" Width="120" Height="100" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="smsButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="smsIcon.png"/>
+            </Button.Background>
+        </Button>
+        <Label x:Name="lblID" Content="Message ID :" HorizontalAlignment="Left" Margin="270,16,0,0" VerticalAlignment="Top" Width="144" FontSize="24" Background="{x:Null}" Foreground="#DDFFFFFF"/>
+        <Label x:Name="lblSender" Content="Sender        : " HorizontalAlignment="Left" Margin="273,74,0,0" VerticalAlignment="Top" Width="144" FontSize="24" Background="{x:Null}" Foreground="#DDFFFFFF"/>
+        <TextBox x:Name="txtSender" HorizontalAlignment="Left" Height="42" Margin="419,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="596" FontSize="20" CaretBrush="#FFD41E46" Foreground="White" SelectionBrush="#FFD41E46" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#89FF0000"/>
+        <TextBox x:Name="txtMessageID" HorizontalAlignment="Left" Height="42" Margin="419,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="596" FontSize="20" CaretBrush="#FFD41E46" Foreground="White" SelectionBrush="#FFD41E46" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#89FF0000"/>
+        <Label x:Name="lblSubject" Content="Subject       :" HorizontalAlignment="Left" Margin="275,134,0,0" VerticalAlignment="Top" Width="144" FontSize="24" Background="{x:Null}" Foreground="#DDFFFFFF"/>
+        <TextBox x:Name="txtSubject" HorizontalAlignment="Left" Height="42" Margin="419,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="596" FontSize="20" CaretBrush="White" Foreground="White" SelectionBrush="#FFFF456E" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="#89FFFFFF"/>
+        <Button x:Name="btnProcess" Content="Process" HorizontalAlignment="Left" Margin="1154,667,0,0" VerticalAlignment="Top" Width="100" Height="35" Background="#FFD41E46" Click="btnProcess_Click" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" VerticalScrollBarVisibility="Auto" Height="350" Margin="265,188,0,0" AcceptsReturn="True" VerticalAlignment="Top" Width="750" Background="White" Foreground="Black" SelectionBrush="#FFD41E46" CaretBrush="White" BorderBrush="#89FFFFFF" RenderTransformOrigin="0,0.591" FontSize="16"/>
+        <Button x:Name="btnViewMessages" Content="View Messages" HorizontalAlignment="Left" Margin="60,663,0,0" VerticalAlignment="Top" Width="130" Background="#FFD41E46" Height="37" Click="btnViewMessages_Click" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnIncidents" Content="Incidents" HorizontalAlignment="Left" Margin="1079,74,0,0" VerticalAlignment="Top" Width="155" Height="35" Background="#FFD41E46" Click="btnIncidents_Click" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnQuarantine" Content="Quarantine " HorizontalAlignment="Left" Margin="1079,23,0,0" VerticalAlignment="Top" Width="155" Height="35" Background="#FFD41E46" Click="btnQuarantine_Click" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnTrends" Content="Trends" HorizontalAlignment="Left" Margin="1079,74,0,0" VerticalAlignment="Top" Width="155" Height="35" Background="#FFD41E46" Click="btnTrends_Click" Visibility="Hidden" BorderBrush="{x:Null}"/>
+
+        <ListView x:Name="listIncidents" HorizontalAlignment="Left" Height="350" Margin="265,188,0,0" VerticalAlignment="Top" Width="1014" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#FFD41E46" Background="{x:Null}" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="75" DisplayMemberBinding="{Binding MessageID}" />
+                    <GridViewColumn Header="Sender" Width="270" DisplayMemberBinding="{Binding Sender}" />
+                    <GridViewColumn Header="Subject" Width="150" DisplayMemberBinding="{Binding Subject}" />
+                    <GridViewColumn Header="Sort Code" Width="100" DisplayMemberBinding="{Binding SortCode}" />
+                    <GridViewColumn Header="Incident" Width="120" DisplayMemberBinding="{Binding Incident}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listMessages" HorizontalAlignment="Left" Height="446" Margin="265,188,0,0" VerticalAlignment="Top" Width="1014" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#FFD41E46" Background="{x:Null}" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="150" DisplayMemberBinding="{Binding MessageID}" />
+                    <GridViewColumn Header="Subject" Width="150" DisplayMemberBinding="{Binding Subject}" />
+                    <GridViewColumn Header="Sender" Width="150" DisplayMemberBinding="{Binding Sender}" />
+                    <GridViewColumn Header="Message" Width="450" DisplayMemberBinding="{Binding filteredMessage}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listQuarantine" HorizontalAlignment="Left" Height="446" Margin="265,188,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Width="1014" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Message ID" Width="150" DisplayMemberBinding="{Binding Item1}" />
+                    <GridViewColumn Header="URL" Width="585" DisplayMemberBinding="{Binding Item2}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listHastags" HorizontalAlignment="Left" Height="350" Margin="265,188,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Width="350" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Hashtag" Width="240" DisplayMemberBinding="{Binding Key}" />
+                    <GridViewColumn Header="Occurrences" Width="590" DisplayMemberBinding="{Binding Value}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listMentions" HorizontalAlignment="Left" Height="350" Margin="604,188,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Width="411" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="User" Width="240" DisplayMemberBinding="{Binding Key}" />
+                    <GridViewColumn Header="Mentions" Width="585" DisplayMemberBinding="{Binding Value}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="275,663,0,0" VerticalAlignment="Top" Width="100" Height="35" Background="#FFD41E46" Click="btnSave_Click" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left" Margin="275,664,0,0" VerticalAlignment="Top" Width="100" Height="35" Background="#FFD41E46" Click="btnLoad_Click" BorderBrush="{x:Null}" Visibility="Hidden"/>
+    </Grid>
+</Window>
